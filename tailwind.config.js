@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-import moduleName from 'module'
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
@@ -10,4 +9,3 @@ module.exports = {
   },
   plugins: []
 }
-// font-family: 'Open Sans', sans-serif;
