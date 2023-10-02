@@ -1,11 +1,10 @@
 <template>
-  <header class="w-full">
+  <header class="w-full text-sm">
     <div class="fixed left-0 top-0 h-16 w-full bg-white">
-      <div class="border-brand-grey-1 mx-auto flex h-full flex-nowrap border-b border-solid px-8">
-        <a class="flex h-full items-center text-xl" href="/">{{ company }} </a>
-        <h2 class="ml-8 flex h-full items-center">
-          Develop by {{ author.firstName }} {{ author.lastName }}
-        </h2>
+      <div
+        class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8"
+      >
+        <a v-bind:href="url"  class="flex h-full items-center text-xl">{{ company }}</a>
       </div>
     </div>
   </header>
@@ -13,11 +12,12 @@
 
 <script>
 export default {
-  name: 'MainNav',
+  name: "MainNav",
   data() {
-    return { company: 'Bobo careers', author: { firstName: 'ido', lastName: 'Mandelman' } }
-  }
-}
+    return {
+      company: "Bobo Careers",
+      url:'https://www.google.com/'
+    };
+  },
+};
 </script>
-
-<style lang=""></style>
