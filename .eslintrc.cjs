@@ -1,5 +1,5 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+require("@rushstack/eslint-patch/modern-module-resolution");
 
 module.exports = {
   root: true,
@@ -10,6 +10,9 @@ module.exports = {
     "plugin:vitest-globals/recommended",
   ],
   parserOptions: {
-    ecmaVersion: 'latest'
-  }
-}
+    ecmaVersion: "latest",
+  },
+  env: {
+    "vitest-globals/env": true,
+  },
+};

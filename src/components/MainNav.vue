@@ -4,20 +4,66 @@
       <div
         class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8"
       >
-        <a v-bind:href="url"  class="flex h-full items-center text-xl">{{ company }}</a>
+        <a :href="url" class="flex h-full items-center text-xl">{{
+          company
+        }}</a>
+
+        <nav class="ml-2 h-full">
+          <ul class="flex h-full list-none">
+            <li
+              v-for="menuItem in menuItems"
+              :key="menuItem"
+              class="ml-9 h-full first:ml-0"
+            >
+              <a href="" class="flex h-full items-center py-2.5">{{
+                menuItem
+              }}</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="ml-auto flex h-full items-center">
+          <Profile-Image v-if="isLoggedIn" @click="handleAuth" />
+          <Action-Button v-else @click="handleAuth" />
+        </div>
+        <div></div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import ActionButton from "./ActionButton.vue";
+import ProfileImage from "./ProfileImage.vue";
+
 export default {
   name: "MainNav",
+  components: { ActionButton, ProfileImage },
+
   data() {
     return {
       company: "Bobo Careers",
-      url:'https://www.google.com/'
+      url: "https://careers.google.com",
+      menuItems: [
+        "Teams",
+        "Locations",
+        "Life at Bobo Corp",
+        "How we hire",
+        "Students",
+        "Jobs",
+      ],
+      isLoggedIn: false,
     };
+  },
+  methods: {
+    // loginUser() {
+    //   this.isLoggedIn = true;
+    // },
+    // logoutUser() {
+    //   this.isLoggedIn = false;
+    // },
+    handleAuth() {
+      this.isLoggedIn = !this.isLoggedIn;
+    },
   },
 };
 </script>
