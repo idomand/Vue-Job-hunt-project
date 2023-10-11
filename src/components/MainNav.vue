@@ -8,7 +8,7 @@
           company
         }}</a>
 
-        <nav class="ml-2 h-full">
+        <nav class="ml-12 h-full">
           <ul class="flex h-full list-none">
             <li
               v-for="menuItem in menuItems"
@@ -21,24 +21,31 @@
             </li>
           </ul>
         </nav>
+
         <div class="ml-auto flex h-full items-center">
-          <Profile-Image v-if="isLoggedIn" @click="handleAuth" />
-          <Action-Button v-else @click="handleAuth" />
+          <profile-image v-if="isLoggedIn" />
+          <action-button
+            v-else
+            button-type="primary"
+            text="Sign in"
+            @click="loginUser"
+          />
         </div>
-        <div></div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
-import ActionButton from "./ActionButton.vue";
-import ProfileImage from "./ProfileImage.vue";
+import ActionButton from "@/components/ActionButton.vue";
+import ProfileImage from "@/components/ProfileImage.vue";
 
 export default {
   name: "MainNav",
-  components: { ActionButton, ProfileImage },
-
+  components: {
+    ActionButton,
+    ProfileImage,
+  },
   data() {
     return {
       company: "Bobo Careers",
@@ -55,14 +62,8 @@ export default {
     };
   },
   methods: {
-    // loginUser() {
-    //   this.isLoggedIn = true;
-    // },
-    // logoutUser() {
-    //   this.isLoggedIn = false;
-    // },
-    handleAuth() {
-      this.isLoggedIn = !this.isLoggedIn;
+    loginUser() {
+      this.isLoggedIn = true;
     },
   },
 };

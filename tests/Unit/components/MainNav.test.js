@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/vue";
+import userEvent from "@testing-library/user-event";
 
 import MainNav from "@/components/MainNav.vue";
-import { expect } from "vitest";
-import userEvent from "@testing-library/user-event";
 
 describe("MainNav", () => {
   it("displays company name", () => {
@@ -15,7 +14,7 @@ describe("MainNav", () => {
     render(MainNav);
     const navigationMenuItems = screen.getAllByRole("listitem");
     const navigationMenuTexts = navigationMenuItems.map(
-      (item) => item.textContent,
+      (item) => item.textContent
     );
     expect(navigationMenuTexts).toEqual([
       "Teams",
@@ -27,21 +26,24 @@ describe("MainNav", () => {
     ]);
   });
 
-  describe("when the user Logs in", () => {
-    test("show profile picture", async () => {
+  describe("when the user logs in", () => {
+    it("displays user profile picture", async () => {
       render(MainNav);
-      let profileImageElement = screen.queryByRole("img", {
+
+      let profileImage = screen.queryByRole("img", {
         name: /user profile image/i,
       });
-      const signInButtonElement = screen.queryByRole("button", {
-        name: /Sign In/i,
+      expect(profileImage).not.toBeInTheDocument();
+
+      const loginButton = screen.getByRole("button", {
+        name: /sign in/i,
       });
-      expect(profileImageElement).not.toBeInTheDocument();
-      await userEvent.click(signInButtonElement);
-      profileImageElement = screen.getByRole("img", {
+      await userEvent.click(loginButton);
+
+      profileImage = screen.getByRole("img", {
         name: /user profile image/i,
       });
-      expect(profileImageElement).toBeInTheDocument();
+      expect(profileImage).toBeInTheDocument();
     });
   });
 });
