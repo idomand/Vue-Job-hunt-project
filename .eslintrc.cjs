@@ -15,4 +15,7 @@ module.exports = {
   env: {
     "vitest-globals/env": true,
   },
+  rules: {
+    "prettier/prettier": ["error", { endOfLine: "auto" }],
+  },
 };
