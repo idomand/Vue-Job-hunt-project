@@ -1,44 +1,47 @@
 import { render, screen } from "@testing-library/vue";
 
-import TheSubNav from "../../../src/components/TheSubNav.vue";
-import { expect } from "vitest";
+import TheSubnav from "@/components/TheSubnav.vue";
 
-describe("testing TheSubNav", () => {
+describe("TheSubnav", () => {
   describe("when user is on jobs page", () => {
-    test("should show job count", () => {
-      render(TheSubNav, {
+    it("displays job count", () => {
+      render(TheSubnav, {
         global: {
           stubs: {
-            fontAwesomeIcon: true,
+            FontAwesomeIcon: true,
           },
         },
         data() {
-          return { onJobResultsPage: true };
+          return {
+            onJobResultsPage: true,
+          };
         },
       });
+
       const jobCount = screen.getByText("1653");
+
       expect(jobCount).toBeInTheDocument();
     });
   });
 
-  describe("when user is NOT on jobs page", () => {
-    test("should NOT show job count", () => {
-      render(TheSubNav, {
+  describe("when user is not on jobs page", () => {
+    it("does NOT display job count", () => {
+      render(TheSubnav, {
         global: {
           stubs: {
-            fontAwesomeIcon: true,
+            FontAwesomeIcon: true,
           },
         },
         data() {
-          return { onJobResultsPage: false };
+          return {
+            onJobResultsPage: false,
+          };
         },
       });
+
       const jobCount = screen.queryByText("1653");
+
       expect(jobCount).not.toBeInTheDocument();
     });
-  });
-
-  test("should first", () => {
-    expect(1).toBe(1);
   });
 });

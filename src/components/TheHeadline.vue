@@ -5,12 +5,13 @@
       <br />
       for everyone
     </h1>
-    <h2 class="text-3xl font-light">Find you next job</h2>
+    <h2 class="text-3xl font-light">Find your next job at Bobo Corp.</h2>
   </section>
 </template>
 
 <script>
-import nextElementInList from "../util/nextElementInList";
+import nextElementInList from "@/utils/nextElementInList";
+
 export default {
   name: "TheHeadline",
   data() {
@@ -22,7 +23,7 @@ export default {
   computed: {
     actionClasses() {
       return {
-        [this.action.toLocaleLowerCase()]: true,
+        [this.action.toLowerCase()]: true,
       };
     },
   },
@@ -37,7 +38,7 @@ export default {
       this.interval = setInterval(() => {
         const actions = ["Build", "Create", "Design", "Code"];
         this.action = nextElementInList(actions, this.action);
-      }, 2000);
+      }, 3000);
     },
   },
 };
@@ -45,15 +46,18 @@ export default {
 
 <style scoped>
 .build {
-  color: blue;
+  color: #1a73e8;
 }
+
 .create {
-  color: green;
+  color: #34a853;
 }
+
 .design {
-  color: orange;
+  color: #f9ab00;
 }
+
 .code {
-  color: red;
+  color: #d93025;
 }
 </style>

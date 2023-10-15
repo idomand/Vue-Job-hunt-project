@@ -1,7 +1,7 @@
-const favoriteFood = "sushi";
+const interval = setInterval(() => {
+  console.log("I will print every 2 seconds");
+}, 2000);
 
-const goodFoods = {
-  [favoriteFood]: true,
-};
-
-console.log(goodFoods);
+setTimeout(() => {
+  clearInterval(interval);
+}, 10000);

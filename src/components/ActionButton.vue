@@ -12,7 +12,7 @@ export default {
       type: String,
       required: true,
     },
-    buttonType: {
+    type: {
       type: String,
       required: false,
       default: "primary",
@@ -24,7 +24,7 @@ export default {
   computed: {
     buttonClass() {
       return {
-        [this.buttonType]: true,
+        [this.type]: true,
       };
     },
   },

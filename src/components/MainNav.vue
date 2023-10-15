@@ -7,12 +7,13 @@
         <a :href="url" class="flex h-full items-center text-xl">{{
           company
         }}</a>
-        <nav class="ml-2 h-full">
+
+        <nav class="ml-12 h-full">
           <ul class="flex h-full list-none">
             <li
               v-for="menuItem in menuItems"
               :key="menuItem"
-              class="ml-5 h-full first:ml-0"
+              class="ml-9 h-full first:ml-0"
             >
               <a href="" class="flex h-full items-center py-2.5">{{
                 menuItem
@@ -22,31 +23,27 @@
         </nav>
 
         <div class="ml-auto flex h-full items-center">
-          <profile-image v-if="isLoggedIn" @click="handleAuth" />
-          <action-button
-            v-else
-            button-type="primary"
-            text="Sign in"
-            @click="handleAuth"
-          />
+          <profile-image v-if="isLoggedIn" />
+          <action-button v-else text="Sign in" @click="loginUser" />
         </div>
       </div>
-      <the-sub-nav v-if="isLoggedIn" />
+
+      <the-subnav v-if="isLoggedIn" />
     </div>
   </header>
 </template>
 
 <script>
-import ActionButton from "./ActionButton.vue";
-import ProfileImage from "./ProfileImage.vue";
-import TheSubNav from "./TheSubNav.vue";
+import ActionButton from "@/components/ActionButton.vue";
+import ProfileImage from "@/components/ProfileImage.vue";
+import TheSubnav from "@/components/TheSubnav.vue";
 
 export default {
   name: "MainNav",
   components: {
     ActionButton,
     ProfileImage,
-    TheSubNav,
+    TheSubnav,
   },
   data() {
     return {
@@ -72,11 +69,8 @@ export default {
     },
   },
   methods: {
-    // loginUser() {
-    //   this.isLoggedIn = true;
-    // },
-    handleAuth() {
-      this.isLoggedIn = !this.isLoggedIn;
+    loginUser() {
+      this.isLoggedIn = true;
     },
   },
 };

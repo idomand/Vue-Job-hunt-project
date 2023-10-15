@@ -8,7 +8,7 @@ describe("MainNav", () => {
     render(MainNav, {
       global: {
         stubs: {
-          fontAwesomeIcon: true,
+          FontAwesomeIcon: true,
         },
       },
     });
@@ -24,7 +24,7 @@ describe("MainNav", () => {
     renderMainNav();
     const navigationMenuItems = screen.getAllByRole("listitem");
     const navigationMenuTexts = navigationMenuItems.map(
-      (item) => item.textContent,
+      (item) => item.textContent
     );
     expect(navigationMenuTexts).toEqual([
       "Teams",
