@@ -7,11 +7,10 @@
       <div class="flex h-full flex-1 relative items-center pr-3">
         <label class="absolute left-0 -top-10" for="">Role</label>
         <input
-          :value="role"
+          v-model="role"
           class="w-full font-normal text-lg focus:outline-none"
           placeholder="software developer"
           type="text"
-          @input="role = $event.target.value"
         />
       </div>
       <span
@@ -22,11 +21,10 @@
       <div class="flex h-full flex-1 relative items-center pl-3">
         <label class="absolute left-0 -top-10" for="">Where?</label>
         <input
-          :value="location"
+          v-model="location"
           class="w-full font-normal text-lg focus:outline-none"
           placeholder="Berlin"
           type="text"
-          @input="location = $event.target.value"
         />
       </div>
     </div>
@@ -34,7 +32,7 @@
   </form>
 </template>
 <script>
-import ActionButton from "./ActionButton.vue";
+import ActionButton from "../Shared/ActionButton.vue";
 export default {
   name: "TheJobSearchForm",
 
@@ -46,10 +44,6 @@ export default {
     };
   },
   computed: {},
-  methods: {
-    updateRole(event) {
-      this.role = event.target.value;
-    },
-  },
+  methods: {},
 };
 </script>
