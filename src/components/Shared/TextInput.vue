@@ -2,7 +2,7 @@
   <input
     class="w-full font-normal text-lg focus:outline-none"
     type="text"
-    :value="value"
+    :value="modelValue"
     @input="handleInput"
   />
 </template>
@@ -12,11 +12,12 @@ export default {
   name: "TextInput",
 
   props: {
-    value: { type: String, required: true },
+    modelValue: { type: String, required: true },
   },
+  emits: ["update:modelValue"],
   methods: {
     handleInput($event) {
-      this.$emit("handleInput", $event.target.value);
+      this.$emit("update:modelValue", $event.target.value);
     },
   },
 };
