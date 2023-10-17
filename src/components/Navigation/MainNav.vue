@@ -4,7 +4,7 @@
       <div
         class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8"
       >
-        <router-link class="flex h-full items-center text-xl" to="/">
+        <router-link class="flex h-full items-center text-2xl" to="/">
           Home
         </router-link>
 
@@ -12,14 +12,15 @@
           <ul class="flex h-full list-none">
             <li
               v-for="menuItem in menuItems"
-              :key="menuItem"
-              class="ml-9 h-full first:ml-0"
+              :key="menuItem.text"
+              class="ml-9 h-full first:ml-0 text-2xl"
             >
-              <a href="" class="flex h-full items-center py-2.5">{{
-                menuItem
-              }}</a>
+              <router-link
+                class="flex h-full items-center py-2.5"
+                :to="menuItem.url"
+                >{{ menuItem.text }}</router-link
+              >
             </li>
-            <router-link to="/jobs/results">Job Results</router-link>
           </ul>
         </nav>
 
@@ -49,12 +50,12 @@ export default {
   data() {
     return {
       menuItems: [
-        "Teams",
-        "Locations",
-        "Life at Bobo Corp",
-        "How we hire",
-        "Students",
-        "Jobs",
+        { text: "Teams", url: "/" },
+        { text: "Locations", url: "/" },
+        { text: "Life at Bobo Corp", url: "/" },
+        { text: "How we hire", url: "/" },
+        { text: "Students", url: "/" },
+        { text: "Jobs", url: "/jobs/results" },
       ],
       isLoggedIn: false,
     };
