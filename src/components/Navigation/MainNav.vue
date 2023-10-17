@@ -4,9 +4,9 @@
       <div
         class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8"
       >
-        <a :href="url" class="flex h-full items-center text-xl">{{
-          company
-        }}</a>
+        <router-link class="flex h-full items-center text-xl" to="/">
+          Home
+        </router-link>
 
         <nav class="ml-12 h-full">
           <ul class="flex h-full list-none">
@@ -19,6 +19,7 @@
                 menuItem
               }}</a>
             </li>
+            <router-link to="/jobs/results">Job Results</router-link>
           </ul>
         </nav>
 
@@ -47,8 +48,6 @@ export default {
   },
   data() {
     return {
-      company: "Bobo Careers",
-      url: "https://careers.google.com",
       menuItems: [
         "Teams",
         "Locations",
