@@ -1,16 +1,21 @@
-import { render, screen } from "@testing-library/vue";
 import { RouterLinkStub } from "@vue/test-utils";
+import { renderComponent, screen } from "../../../setup.js";
 
 import JobListing from "../../../../src/components/JobResults/JobListing.vue";
-import { expect } from "vitest";
 
 describe("JobListing", () => {
   function createJobProps(jobProps = {}) {
-    return { title: "foo", organization: "foobar", ...jobProps };
+    return {
+      title: "foo",
+      organization: "foobar",
+      minimumQualifications: ["Morph bricks-and-clicks relationships", "test"],
+      locations: ["Berlin", "London"],
+      ...jobProps,
+    };
   }
 
   function renderJobListing(jobProps) {
-    render(JobListing, {
+    renderComponent(JobListing, {
       props: { job: { ...jobProps } },
       global: {
         stubs: {
@@ -31,5 +36,24 @@ describe("JobListing", () => {
     renderJobListing(jobProps);
     const title = screen.getByText("test123");
     expect(title).toBeInTheDocument();
+  });
+
+  test("render job Locations", () => {
+    const jobProps = createJobProps({ locations: ["Berlin", "London"] });
+    renderJobListing(jobProps);
+    const Berlin = screen.getByText("Berlin");
+    const London = screen.getByText("London");
+    expect(London).toBeInTheDocument();
+    expect(Berlin).toBeInTheDocument();
+  });
+
+  test("render job Locations", () => {
+    const jobProps = createJobProps({
+      minimumQualifications: ["Morph bricks-and-clicks relationships", "test"],
+    });
+    renderJobListing(jobProps);
+    expect(
+      screen.getByText("Morph bricks-and-clicks relationships"),
+    ).toBeInTheDocument();
   });
 });

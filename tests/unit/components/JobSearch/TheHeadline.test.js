@@ -1,5 +1,5 @@
 import { nextTick } from "vue";
-import { render, screen } from "@testing-library/vue";
+import { renderComponent, screen } from "../../../setup.js";
 
 import TheHeadline from "@/components/JobSearch/TheHeadline.vue";
 
@@ -13,7 +13,7 @@ describe("TheHeadline", () => {
   });
 
   it("displays introductory action verb", () => {
-    render(TheHeadline);
+    renderComponent(TheHeadline);
 
     const actionPhrase = screen.getByRole("heading", {
       name: /build for everyone/i,
@@ -25,13 +25,13 @@ describe("TheHeadline", () => {
     const mock = vi.fn();
     vi.stubGlobal("setInterval", mock);
 
-    render(TheHeadline);
+    renderComponent(TheHeadline);
 
     expect(mock).toHaveBeenCalled();
   });
 
   it("swaps action verb after interval", async () => {
-    render(TheHeadline);
+    renderComponent(TheHeadline);
     vi.advanceTimersToNextTimer();
 
     await nextTick();
@@ -46,7 +46,7 @@ describe("TheHeadline", () => {
     const clearInterval = vi.fn();
     vi.stubGlobal("clearInterval", clearInterval);
 
-    const { unmount } = render(TheHeadline);
+    const { unmount } = renderComponent(TheHeadline);
     unmount();
     expect(clearInterval).toHaveBeenCalled();
     vi.unstubAllGlobals();

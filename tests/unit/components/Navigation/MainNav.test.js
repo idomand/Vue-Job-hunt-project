@@ -1,12 +1,12 @@
-import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 import { RouterLinkStub } from "@vue/test-utils";
 import MainNav from "@/components/Navigation/MainNav.vue";
+import { renderComponent, screen } from "../../../setup.js";
 
 describe("MainNav", () => {
   const renderMainNav = () => {
     const $route = { name: "Home" };
-    render(MainNav, {
+    renderComponent(MainNav, {
       global: {
         stubs: {
           FontAwesomeIcon: true,

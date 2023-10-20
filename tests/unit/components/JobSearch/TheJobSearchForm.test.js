@@ -1,8 +1,7 @@
-import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
+import { renderComponent, screen } from "../../../setup.js";
 
 import TheJobSearchForm from "../../../../src/components/JobSearch/TheJobSearchForm.vue";
-// import { expect, vi } from "vitest";
 
 describe("TheJobSearchForm", () => {
   describe("when user Submit form", () => {
@@ -11,7 +10,7 @@ describe("TheJobSearchForm", () => {
 
       const $router = { push };
 
-      render(TheJobSearchForm, {
+      renderComponent(TheJobSearchForm, {
         global: {
           stubs: {
             FontAwesomeIcon: true,
