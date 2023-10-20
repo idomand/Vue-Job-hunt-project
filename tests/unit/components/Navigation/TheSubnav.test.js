@@ -1,10 +1,11 @@
-import { render, screen } from "@testing-library/vue";
+// import { render, screen } from "@testing-library/vue";
+import { renderComponent, screen } from "../../../setup.js";
 
 import TheSubnav from "@/components/Navigation/TheSubnav.vue";
 
 describe("TheSubnav", () => {
   function renderSubNav(routeName) {
-    render(TheSubnav, {
+    renderComponent(TheSubnav, {
       global: {
         mocks: { $route: { name: routeName } },
       },
@@ -17,7 +18,6 @@ describe("TheSubnav", () => {
 
       renderSubNav(routeName);
 
-      screen.debug();
       const jobCount = screen.getByText("1653");
 
       expect(jobCount).toBeInTheDocument();
