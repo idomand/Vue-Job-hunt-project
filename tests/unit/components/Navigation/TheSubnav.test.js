@@ -7,9 +7,6 @@ describe("TheSubnav", () => {
     render(TheSubnav, {
       global: {
         mocks: { $route: { name: routeName } },
-        stubs: {
-          FontAwesomeIcon: true,
-        },
       },
     });
   }

@@ -1,4 +1,3 @@
-import { RouterLinkStub } from "@vue/test-utils";
 import { renderComponent, screen } from "../../../setup.js";
 
 import JobListing from "../../../../src/components/JobResults/JobListing.vue";
@@ -17,11 +16,6 @@ describe("JobListing", () => {
   function renderJobListing(jobProps) {
     renderComponent(JobListing, {
       props: { job: { ...jobProps } },
-      global: {
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-      },
     });
   }
 

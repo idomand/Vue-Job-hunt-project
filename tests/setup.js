@@ -8,15 +8,27 @@ afterEach(() => {
 });
 export * from "@testing-library/vue";
 
-const basicOptions = {
-  global: {
-    stubs: {
-      RouterLink: RouterLinkStub,
-      FontAwesomeIcon: true,
+export function renderComponent(element, options = {}) {
+  const defaultOptions = {
+    global: {
+      stubs: {
+        RouterLink: RouterLinkStub,
+        FontAwesomeIcon: true,
+      },
     },
-  },
-};
+  };
+  const mergedOptions = {
+    ...defaultOptions,
+    ...options,
+  };
 
-export function renderComponent(element, options = basicOptions) {
-  return { ...render(element, options) };
+  if (options.global && options.global.mocks) {
+    mergedOptions.global.mocks = options.global.mocks;
+  }
+
+  if (options && options.props) {
+    mergedOptions.props = options.props;
+  }
+
+  return { ...render(element, mergedOptions) };
 }

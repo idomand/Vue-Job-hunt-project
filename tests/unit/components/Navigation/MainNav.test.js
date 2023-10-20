@@ -1,5 +1,4 @@
 import userEvent from "@testing-library/user-event";
-import { RouterLinkStub } from "@vue/test-utils";
 import MainNav from "@/components/Navigation/MainNav.vue";
 import { renderComponent, screen } from "../../../setup.js";
 
@@ -8,10 +7,6 @@ describe("MainNav", () => {
     const $route = { name: "Home" };
     renderComponent(MainNav, {
       global: {
-        stubs: {
-          FontAwesomeIcon: true,
-          RouterLink: RouterLinkStub,
-        },
         mocks: { $route: $route },
       },
     });

@@ -12,9 +12,6 @@ describe("TheJobSearchForm", () => {
 
       renderComponent(TheJobSearchForm, {
         global: {
-          stubs: {
-            FontAwesomeIcon: true,
-          },
           mocks: { $router: $router },
         },
       });
