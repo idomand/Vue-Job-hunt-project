@@ -20,7 +20,8 @@ describe("JobListings", () => {
       },
     });
 
-    expect(axios.get).toHaveBeenCalledWith("http://localhost:3000/jobs/");
+    expect(axios.get).toHaveBeenCalledWith(import.meta.env.VITE_APP_API_URL);
+    // expect(axios.get).toHaveBeenCalledWith("http://localhost:3000/jobs/");
   });
 
   test("it display Maximum of 10 jobs", async () => {
