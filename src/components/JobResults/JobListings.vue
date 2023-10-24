@@ -29,8 +29,10 @@
 
 <script>
 import JobListing from "@/components/JobResults/JobListing.vue";
-
-import axios from "axios";
+// import useJobStore from "../../stores/jobs";
+// import { mapActions, mapState } from "pinia";
+import getJobs from "../../api/getJobs.js";
+// import axios from "axios";
 export default {
   name: "JobListings",
   components: { JobListing },
@@ -61,15 +63,27 @@ export default {
       const pageNumber = this.currentPage;
       const firstJobIndex = (pageNumber - 1) * this.jobsPerPage;
       const lastJobIndex = pageNumber * this.jobsPerPage;
+      // return this.jobs.slice(firstJobIndex, lastJobIndex);
+      console.log("poop");
+      console.log("this.jobsList", this.jobsList);
+      // return this.jobsList;
+
       return this.jobs.slice(firstJobIndex, lastJobIndex);
     },
   },
   async mounted() {
-    const baseURL = "http://localhost:3000/jobs/";
-    // const baseURL = import.meta.env.VITE_APP_API_URL;
-    const response = await axios.get(baseURL);
-    const data = await response.data;
-    this.jobs = data;
+    // const baseURL = "http://localhost:3000/jobs/";
+    // // const baseURL = import.meta.env.VITE_APP_API_URL;
+    // const response = await axios.get(baseURL);
+    // const data = await response.data;
+    // this.jobs = data;
+    this.jobs = await getJobs();
+    // this.getJobsFunc();
   },
+  // ...mapState(useJobStore, ["jobsList"]),
+
+  // methods: {
+  //   ...mapActions(useJobStore, ["getJobsFunc"]),
+  // },
 };
 </script>

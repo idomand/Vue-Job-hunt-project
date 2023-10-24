@@ -22,25 +22,3 @@ describe("userStore", () => {
     });
   });
 });
-
-// describe("userState", () => {
-//   beforeEach(() => {
-//     setActivePinia(createPinia());
-//   });
-//   test("it keeps track of if user is logged in", () => {
-//     const store = useUserStore();
-//     expect(store.isLoggedIn).toBe(false);
-//   });
-// });
-
-// describe("user actions", () => {
-//   beforeEach(() => {
-//     setActivePinia(createPinia());
-//   });
-//   test("logs the user in", () => {
-//     const store = useUserStore();
-//     expect(store.isLoggedIn).toBe(false);
-//     store.loginUser();
-//     expect(store.isLoggedIn).toBe(true);
-//   });
-// });
