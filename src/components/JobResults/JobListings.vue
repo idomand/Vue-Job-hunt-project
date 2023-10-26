@@ -36,7 +36,7 @@ export default {
   components: { JobListing },
   data() {
     return {
-      jobsPerPage: 3,
+      jobsPerPage: 10,
     };
   },
   computed: {
@@ -51,19 +51,19 @@ export default {
 
     ...mapState(useJobStore, {
       jobs: "jobs",
-      nextPage() {
-        const nextPage = this.currentPage + 1;
-        const maxPage = Math.ceil(this.jobs.length / this.jobsPerPage);
-        return nextPage <= maxPage ? nextPage : undefined;
-      },
-
-      displayedJobs() {
-        const pageNumber = this.currentPage;
-        const firstJobIndex = (pageNumber - 1) * this.jobsPerPage;
-        const lastJobIndex = pageNumber * this.jobsPerPage;
-        return this.jobs.slice(firstJobIndex, lastJobIndex);
-      },
     }),
+    nextPage() {
+      const nextPage = this.currentPage + 1;
+      const maxPage = Math.ceil(this.jobs.length / this.jobsPerPage);
+      return nextPage <= maxPage ? nextPage : undefined;
+    },
+
+    displayedJobs() {
+      const pageNumber = this.currentPage;
+      const firstJobIndex = (pageNumber - 1) * this.jobsPerPage;
+      const lastJobIndex = pageNumber * this.jobsPerPage;
+      return this.jobs.slice(firstJobIndex, lastJobIndex);
+    },
   },
   async mounted() {
     this.FETCH_JOBS();
