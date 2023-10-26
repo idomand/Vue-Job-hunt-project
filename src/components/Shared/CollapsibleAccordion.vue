@@ -4,7 +4,7 @@
       class="flex flex-wrap items-center justify-between cursor-pointer"
       @click="open"
     >
-      <h3 class="text-base font-semibold">Organizations</h3>
+      <h3 class="text-base font-semibold">{{ header }}</h3>
       <font-awesome-icon :icon="caretIcon" />
       <div v-if="isOpen" class="mt-5 w-full">
         <slot></slot>
@@ -16,6 +16,10 @@
 <script>
 export default {
   name: "CollapsibleAccordion",
+
+  props: {
+    header: { require: true, type: String, default: "foo" },
+  },
 
   data() {
     return {
