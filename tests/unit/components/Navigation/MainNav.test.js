@@ -5,7 +5,7 @@ import { createTestingPinia } from "@pinia/testing";
 import useUserStore from "../../../../src/stores/user.js";
 describe("MainNav", () => {
   const pinia = createTestingPinia({ stubActions: true });
-
+  console.log("pinia :>> ", pinia);
   const renderMainNav = () => {
     const $route = { name: "Home" };
     renderComponent(MainNav, {
@@ -19,6 +19,7 @@ describe("MainNav", () => {
   it("displays company name", () => {
     renderMainNav();
     const companyName = screen.getByText("Home");
+
     expect(companyName).toBeInTheDocument();
   });
 

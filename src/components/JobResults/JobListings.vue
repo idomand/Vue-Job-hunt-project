@@ -29,29 +29,19 @@
 
 <script>
 import JobListing from "@/components/JobResults/JobListing.vue";
-// import useJobStore from "../../stores/jobs";
-// import { mapActions, mapState } from "pinia";
-import getJobs from "../../api/getJobs.js";
-// import axios from "axios";
+import useJobStore, { FETCH_JOBS } from "../../stores/jobs";
+import { mapActions, mapState } from "pinia";
 export default {
   name: "JobListings",
   components: { JobListing },
   data() {
     return {
-      jobs: [],
-      jobsSlice: [],
-      jobsPerPage: 10,
+      jobsPerPage: 3,
     };
   },
   computed: {
     currentPage() {
       return Number.parseInt(this.$route.query.page || "1");
-    },
-
-    nextPage() {
-      const nextPage = this.currentPage + 1;
-      const maxPage = Math.ceil(this.jobs.length / this.jobsPerPage);
-      return nextPage <= maxPage ? nextPage : undefined;
     },
     previousPage() {
       const previousPage = this.currentPage - 1;
@@ -59,31 +49,27 @@ export default {
       return previousPage >= firstPage ? previousPage : undefined;
     },
 
-    displayedJobs() {
-      const pageNumber = this.currentPage;
-      const firstJobIndex = (pageNumber - 1) * this.jobsPerPage;
-      const lastJobIndex = pageNumber * this.jobsPerPage;
-      // return this.jobs.slice(firstJobIndex, lastJobIndex);
-      console.log("poop");
-      console.log("this.jobsList", this.jobsList);
-      // return this.jobsList;
+    ...mapState(useJobStore, {
+      jobs: "jobs",
+      nextPage() {
+        const nextPage = this.currentPage + 1;
+        const maxPage = Math.ceil(this.jobs.length / this.jobsPerPage);
+        return nextPage <= maxPage ? nextPage : undefined;
+      },
 
-      return this.jobs.slice(firstJobIndex, lastJobIndex);
-    },
+      displayedJobs() {
+        const pageNumber = this.currentPage;
+        const firstJobIndex = (pageNumber - 1) * this.jobsPerPage;
+        const lastJobIndex = pageNumber * this.jobsPerPage;
+        return this.jobs.slice(firstJobIndex, lastJobIndex);
+      },
+    }),
   },
   async mounted() {
-    // const baseURL = "http://localhost:3000/jobs/";
-    // // const baseURL = import.meta.env.VITE_APP_API_URL;
-    // const response = await axios.get(baseURL);
-    // const data = await response.data;
-    // this.jobs = data;
-    this.jobs = await getJobs();
-    // this.getJobsFunc();
+    this.FETCH_JOBS();
   },
-  // ...mapState(useJobStore, ["jobsList"]),
-
-  // methods: {
-  //   ...mapActions(useJobStore, ["getJobsFunc"]),
-  // },
+  methods: {
+    ...mapActions(useJobStore, [FETCH_JOBS]),
+  },
 };
 </script>
