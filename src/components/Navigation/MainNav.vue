@@ -53,11 +53,11 @@ export default {
   data() {
     return {
       menuItems: [
-        { text: "Teams", url: "/" },
-        { text: "Locations", url: "/" },
-        { text: "Life at Bobo Corp", url: "/" },
-        { text: "How we hire", url: "/" },
-        { text: "Students", url: "/" },
+        // { text: "Teams", url: "/" },
+        // { text: "Locations", url: "/" },
+        // { text: "Life at Bobo Corp", url: "/" },
+        // { text: "How we hire", url: "/" },
+        // { text: "Students", url: "/" },
         { text: "Jobs", url: "/jobs/results" },
       ],
     };
