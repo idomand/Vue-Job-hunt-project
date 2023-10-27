@@ -1,6 +1,7 @@
 <template>
   <div class="border-b border-solid border-brand-gray-2 pt-5">
     <div
+      role="button"
       class="flex flex-wrap items-center justify-between cursor-pointer"
       @click="open"
     >
@@ -18,7 +19,7 @@ export default {
   name: "CollapsibleAccordion",
 
   props: {
-    header: { require: true, type: String, default: "foo" },
+    header: { require: true, type: String },
   },
 
   data() {

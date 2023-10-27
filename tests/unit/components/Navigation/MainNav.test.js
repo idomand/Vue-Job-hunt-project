@@ -3,9 +3,9 @@ import MainNav from "@/components/Navigation/MainNav.vue";
 import { renderComponent, screen } from "../../../setup.js";
 import { createTestingPinia } from "@pinia/testing";
 import useUserStore from "../../../../src/stores/user.js";
+
 describe("MainNav", () => {
   const pinia = createTestingPinia({ stubActions: true });
-  console.log("pinia :>> ", pinia);
   const renderMainNav = () => {
     const $route = { name: "Home" };
     renderComponent(MainNav, {

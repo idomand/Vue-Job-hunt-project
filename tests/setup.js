@@ -20,6 +20,5 @@ export function renderComponent(element, options = {}) {
   };
 
   const mergedOptions = merge(defaultOptions, options);
-
   return { ...render(element, mergedOptions) };
 }
