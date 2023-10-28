@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import getJobs from "../api/getJobs";
-// import axios from "axios";
 
 export const FETCH_JOBS = "FETCH_JOBS";
 
