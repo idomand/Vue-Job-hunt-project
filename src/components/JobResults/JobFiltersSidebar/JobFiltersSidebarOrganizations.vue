@@ -8,7 +8,13 @@
             :key="UNIQUE_ORGANIZATION"
             class="h-8 w-1/2"
           >
-            <input :id="UNIQUE_ORGANIZATION" type="checkbox" class="mr-3" />
+            <input
+              :id="UNIQUE_ORGANIZATION"
+              v-model="selectedOrgs"
+              :value="UNIQUE_ORGANIZATION"
+              type="checkbox"
+              class="mr-3"
+            />
             <label :for="UNIQUE_ORGANIZATION">{{ UNIQUE_ORGANIZATION }}</label>
           </li>
         </ul>
@@ -26,8 +32,19 @@ export default {
   components: {
     CollapsibleAccordion,
   },
+  data() {
+    return {
+      selectedOrgs: [],
+    };
+  },
   computed: {
     ...mapState(useJobStore, [UNIQUE_ORGANIZATIONS]),
   },
 };
 </script>
+
+<!-- 
+
+123asdfth43
+
+ -->

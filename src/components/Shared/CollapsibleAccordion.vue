@@ -7,9 +7,9 @@
     >
       <h3 class="text-base font-semibold">{{ header }}</h3>
       <font-awesome-icon :icon="caretIcon" />
-      <div v-if="isOpen" class="mt-5 w-full">
-        <slot><p>default-content</p></slot>
-      </div>
+    </div>
+    <div v-if="isOpen" class="mt-5 w-full">
+      <slot><p>default-content</p></slot>
     </div>
   </div>
 </template>
