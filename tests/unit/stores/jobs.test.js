@@ -8,6 +8,7 @@ describe("jobsStore", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
+
   describe("jobsState", () => {
     test("stores jobs list", () => {
       const store = useJobStore();
@@ -21,6 +22,20 @@ describe("jobsStore", () => {
       axios.get.mockResolvedValue({ data: ["job1,job2"] });
       await store.FETCH_JOBS();
       expect(store.jobs).toEqual(["job1,job2"]);
+    });
+  });
+
+  describe("getters", () => {
+    test("get UNIQUE_ORGANIZATIONS from list of jobs", () => {
+      const store = useJobStore();
+      store.jobs = [
+        { organization: "google" },
+        { organization: "google" },
+        { organization: "amazon" },
+      ];
+      const result = store.UNIQUE_ORGANIZATIONS;
+      console.log("result :>> ", result);
+      expect(result).toEqual(new Set(["google", "amazon"]));
     });
   });
 });

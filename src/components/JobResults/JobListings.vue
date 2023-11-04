@@ -51,6 +51,7 @@ export default {
 
     ...mapState(useJobStore, {
       jobs: "jobs",
+      listOfOrganizations: "listOfOrganizations",
     }),
     nextPage() {
       const nextPage = this.currentPage + 1;
