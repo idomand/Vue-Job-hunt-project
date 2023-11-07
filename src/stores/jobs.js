@@ -7,6 +7,7 @@ export const UNIQUE_ORGANIZATIONS = "UNIQUE_ORGANIZATIONS";
 export const FILTERED_JOBS_BY_ORGANIZATIONS = "FILTERED_JOBS_BY_ORGANIZATIONS";
 export const UNIQUE_JOB_TYPES = "UNIQUE_JOB_TYPES";
 export const FILTERED_JOBS_BY_JOB_TYPES = "FILTERED_JOBS_BY_JOB_TYPES";
+export const FILTERED_JOBS = "FILTERED_JOBS";
 
 const useJobStore = defineStore("jobs", {
   state: () => {
@@ -53,6 +54,32 @@ const useJobStore = defineStore("jobs", {
         return state.jobs.filter((job) =>
           userStore.selectedJobTypes.includes(job.jobType),
         );
+      }
+    },
+    [FILTERED_JOBS](state) {
+      const userStore = useUserStore();
+      const noSelectedOrganizations =
+        userStore.selectedOrganizations.length == 0;
+      const noSelectedJobTypes = userStore.selectedJobTypes.length == 0;
+
+      if (noSelectedJobTypes && noSelectedOrganizations) {
+        return state.jobs;
+      } else {
+        return state.jobs
+          .filter((job) => {
+            if (noSelectedJobTypes) {
+              return true;
+            } else {
+              return userStore.selectedJobTypes.includes(job.jobType);
+            }
+          })
+          .filter((job) => {
+            if (noSelectedOrganizations) {
+              return true;
+            } else {
+              return userStore.selectedOrganizations.includes(job.organization);
+            }
+          });
       }
     },
   },

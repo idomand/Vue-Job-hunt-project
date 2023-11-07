@@ -20,7 +20,6 @@ const useUserStore = defineStore("user", {
       this.selectedOrganizations = organizations;
     },
     [ADD_SELECTED_JOB_TYPES](jobTypes) {
-      console.log("jobTypes :>> ", jobTypes);
       this.selectedJobTypes = jobTypes;
     },
   },
