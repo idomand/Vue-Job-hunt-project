@@ -29,12 +29,7 @@
 
 <script>
 import JobListing from "@/components/JobResults/JobListing.vue";
-import useJobStore, {
-  FETCH_JOBS,
-  // FILTERED_JOBS_BY_ORGANIZATIONS,
-  // FILTERED_JOBS_BY_JOB_TYPES,
-  FILTERED_JOBS,
-} from "../../stores/jobs";
+import useJobStore, { FETCH_JOBS, FILTERED_JOBS } from "../../stores/jobs";
 import { mapActions, mapState } from "pinia";
 export default {
   name: "JobListings",
@@ -55,8 +50,6 @@ export default {
     },
 
     ...mapState(useJobStore, {
-      // FILTERED_JOBS_BY_ORGANIZATIONS,
-      // FILTERED_JOBS_BY_JOB_TYPES,
       FILTERED_JOBS,
       listOfOrganizations: "listOfOrganizations",
     }),

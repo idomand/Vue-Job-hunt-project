@@ -14,21 +14,13 @@
 
 <script>
 import { mapState } from "pinia";
-import useJobStore, {
-  // FILTERED_JOBS_BY_ORGANIZATIONS,
-  // FILTERED_JOBS_BY_JOB_TYPES,
-  FILTERED_JOBS,
-} from "../../stores/jobs";
+import useJobStore, { FILTERED_JOBS } from "../../stores/jobs";
 
 export default {
   name: "TheSubnav",
 
   computed: {
-    ...mapState(useJobStore, [
-      // FILTERED_JOBS_BY_ORGANIZATIONS,
-      // FILTERED_JOBS_BY_JOB_TYPES,
-      FILTERED_JOBS,
-    ]),
+    ...mapState(useJobStore, [FILTERED_JOBS]),
 
     onJobResultsPage() {
       return this.$route.name === "JobResults";

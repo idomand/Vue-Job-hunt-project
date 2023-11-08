@@ -39,40 +39,6 @@ describe("jobsStore", () => {
         const result = jobStore.UNIQUE_ORGANIZATIONS;
         expect(result).toEqual(new Set(["google", "amazon"]));
       });
-      describe("FILTERED_JOBS_BY_ORGANIZATIONS", () => {
-        test(" -- identifies jobs by organizations", () => {
-          const userStore = useUserStore();
-          const jobStore = useJobStore();
-          jobStore.jobs = [
-            { organization: "google" },
-            { organization: "amazon" },
-            { organization: "microsoft" },
-          ];
-          userStore.selectedOrganizations = ["google", "microsoft"];
-
-          const results = jobStore.FILTERED_JOBS_BY_ORGANIZATIONS;
-          expect(results).toEqual([
-            { organization: "google" },
-            { organization: "microsoft" },
-          ]);
-        });
-        test("when the user did not select any organizations - it returns all jobs", () => {
-          const userStore = useUserStore();
-          const jobStore = useJobStore();
-          jobStore.jobs = [
-            { organization: "google" },
-            { organization: "amazon" },
-            { organization: "microsoft" },
-          ];
-          userStore.selectedOrganizations = [];
-          const results = jobStore.FILTERED_JOBS_BY_ORGANIZATIONS;
-          expect(results).toEqual([
-            { organization: "google" },
-            { organization: "amazon" },
-            { organization: "microsoft" },
-          ]);
-        });
-      });
 
       describe("INCLUDE_JOB_BY_ORGANIZATION", () => {
         describe("when the user has not selected any organizations", () => {
@@ -111,47 +77,6 @@ describe("jobsStore", () => {
         );
       });
 
-      describe("FILTERED_JOBS_BY_JOB_TYPES", () => {
-        test(" -- identifies jobs by jobType", () => {
-          const userStore = useUserStore();
-          const jobStore = useJobStore();
-          jobStore.jobs = [
-            { jobType: "Intern" },
-            { jobType: "Intern" },
-            { jobType: "Temporary" },
-            { jobType: "Part-time" },
-            { jobType: "Full-time" },
-          ];
-          userStore.selectedJobTypes = ["Intern", "Temporary"];
-
-          const results = jobStore.FILTERED_JOBS_BY_JOB_TYPES;
-          expect(results).toEqual([
-            { jobType: "Intern" },
-            { jobType: "Intern" },
-            { jobType: "Temporary" },
-          ]);
-        });
-        test("when the user did not select any organizations - it returns all jobs", () => {
-          const userStore = useUserStore();
-          const jobStore = useJobStore();
-          jobStore.jobs = [
-            { jobType: "Intern" },
-            { jobType: "Intern" },
-            { jobType: "Temporary" },
-            { jobType: "Part-time" },
-            { jobType: "Full-time" },
-          ];
-          userStore.selectedJobTypes = [];
-          const results = jobStore.FILTERED_JOBS_BY_JOB_TYPES;
-          expect(results).toEqual([
-            { jobType: "Intern" },
-            { jobType: "Intern" },
-            { jobType: "Temporary" },
-            { jobType: "Part-time" },
-            { jobType: "Full-time" },
-          ]);
-        });
-      });
       describe("INCLUDE_JOB_BY_JOB_TYPE", () => {
         describe("when the user has not selected any job type", () => {
           test("it includes job", () => {
