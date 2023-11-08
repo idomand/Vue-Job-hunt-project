@@ -73,6 +73,27 @@ describe("jobsStore", () => {
           ]);
         });
       });
+
+      describe("INCLUDE_JOB_BY_ORGANIZATION", () => {
+        describe("when the user has not selected any organizations", () => {
+          test("it includes job", () => {
+            const userStore = useUserStore();
+            userStore.selectedOrganizations = [];
+            const jobStore = useJobStore();
+            const job = { organization: "google" };
+            const result = jobStore.INCLUDE_JOB_BY_ORGANIZATION(job);
+            expect(result).toBe(true);
+          });
+        });
+        test("it identifies if job is associated with givin organization", () => {
+          const userStore = useUserStore();
+          userStore.selectedOrganizations = ["google", "microsoft"];
+          const jobStore = useJobStore();
+          const job = { organization: "google" };
+          const result = jobStore.INCLUDE_JOB_BY_ORGANIZATION(job);
+          expect(result).toBe(true);
+        });
+      });
     });
     describe("JOB_TYPES", () => {
       test("get JOB_TYPES from list of jobs", () => {
@@ -129,6 +150,26 @@ describe("jobsStore", () => {
             { jobType: "Part-time" },
             { jobType: "Full-time" },
           ]);
+        });
+      });
+      describe("INCLUDE_JOB_BY_JOB_TYPE", () => {
+        describe("when the user has not selected any job type", () => {
+          test("it includes job", () => {
+            const userStore = useUserStore();
+            userStore.selectedJobTypes = [];
+            const jobStore = useJobStore();
+            const job = { jobType: "Part-time" };
+            const result = jobStore.INCLUDE_JOB_BY_JOB_TYPE(job);
+            expect(result).toBe(true);
+          });
+        });
+        test("it identifies if job is associated with givin organization", () => {
+          const userStore = useUserStore();
+          userStore.selectedJobTypes = ["Part-time", "Full-time"];
+          const jobStore = useJobStore();
+          const job = { jobType: "Part-time" };
+          const result = jobStore.INCLUDE_JOB_BY_JOB_TYPE(job);
+          expect(result).toBe(true);
         });
       });
     });

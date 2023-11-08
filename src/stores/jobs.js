@@ -8,6 +8,8 @@ export const FILTERED_JOBS_BY_ORGANIZATIONS = "FILTERED_JOBS_BY_ORGANIZATIONS";
 export const UNIQUE_JOB_TYPES = "UNIQUE_JOB_TYPES";
 export const FILTERED_JOBS_BY_JOB_TYPES = "FILTERED_JOBS_BY_JOB_TYPES";
 export const FILTERED_JOBS = "FILTERED_JOBS";
+export const INCLUDE_JOB_BY_ORGANIZATION = "INCLUDE_JOB_BY_ORGANIZATION";
+export const INCLUDE_JOB_BY_JOB_TYPE = "INCLUDE_JOB_BY_JOB_TYPE";
 
 const useJobStore = defineStore("jobs", {
   state: () => {
@@ -56,31 +58,30 @@ const useJobStore = defineStore("jobs", {
         );
       }
     },
-    [FILTERED_JOBS](state) {
-      const userStore = useUserStore();
-      const noSelectedOrganizations =
-        userStore.selectedOrganizations.length == 0;
-      const noSelectedJobTypes = userStore.selectedJobTypes.length == 0;
+    [INCLUDE_JOB_BY_ORGANIZATION]() {
+      return (job) => {
+        const userStore = useUserStore();
+        if (userStore.selectedOrganizations.length == 0) {
+          return true;
+        }
+        return userStore.selectedOrganizations.includes(job.organization);
+      };
+    },
 
-      if (noSelectedJobTypes && noSelectedOrganizations) {
-        return state.jobs;
-      } else {
-        return state.jobs
-          .filter((job) => {
-            if (noSelectedJobTypes) {
-              return true;
-            } else {
-              return userStore.selectedJobTypes.includes(job.jobType);
-            }
-          })
-          .filter((job) => {
-            if (noSelectedOrganizations) {
-              return true;
-            } else {
-              return userStore.selectedOrganizations.includes(job.organization);
-            }
-          });
-      }
+    [INCLUDE_JOB_BY_JOB_TYPE]() {
+      return (job) => {
+        const userStore = useUserStore();
+        if (userStore.selectedJobTypes.length == 0) {
+          return true;
+        }
+        return userStore.selectedJobTypes.includes(job.jobType);
+      };
+    },
+
+    [FILTERED_JOBS](state) {
+      return state.jobs
+        .filter((job) => this.INCLUDE_JOB_BY_ORGANIZATION(job))
+        .filter((job) => this.INCLUDE_JOB_BY_JOB_TYPE(job));
     },
   },
 });
