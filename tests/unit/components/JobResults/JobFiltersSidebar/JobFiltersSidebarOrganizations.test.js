@@ -10,12 +10,16 @@ describe("JobFiltersSidebarOrganizations", () => {
     const pinia = createTestingPinia();
     const jobStore = useJobStore();
     const userStore = useUserStore();
+
+    const $router = { push: vi.fn() };
+
     renderComponent(JobFiltersSidebarOrganizations, {
       global: {
         plugins: [pinia],
+        mocks: { $router },
       },
     });
-    return { jobStore, userStore };
+    return { jobStore, userStore, $router };
   }
   test("render UNIQUE ORGANIZATIONS list from jobs", async () => {
     const { jobStore } = renderJobFiltersSidebarOrganizations();
@@ -33,18 +37,33 @@ describe("JobFiltersSidebarOrganizations", () => {
     expect(organizations).toEqual(["google", "amazon"]);
   });
 
-  test("show that the user clicked on a checkbox", async () => {
-    const { jobStore, userStore } = renderJobFiltersSidebarOrganizations();
-    jobStore.UNIQUE_ORGANIZATIONS = new Set(["google", "amazon"]);
+  describe("when user click checkbox", () => {
+    test("show that the user clicked on a checkbox", async () => {
+      const { jobStore, userStore } = renderJobFiltersSidebarOrganizations();
+      jobStore.UNIQUE_ORGANIZATIONS = new Set(["google", "amazon"]);
 
-    const CollapsibleAccordionHeader = screen.getByRole("button", {
-      name: /organizations/i,
+      const CollapsibleAccordionHeader = screen.getByRole("button", {
+        name: /organizations/i,
+      });
+      await userEvent.click(CollapsibleAccordionHeader);
+      const googleCheckbox = screen.getByRole("checkbox", { name: "google" });
+      await userEvent.click(googleCheckbox);
+      expect(userStore.ADD_SELECTED_ORGANIZATION).toHaveBeenCalledWith([
+        "google",
+      ]);
     });
-    await userEvent.click(CollapsibleAccordionHeader);
-    const googleCheckbox = screen.getByRole("checkbox", { name: "google" });
-    await userEvent.click(googleCheckbox);
-    expect(userStore.ADD_SELECTED_ORGANIZATION).toHaveBeenCalledWith([
-      "google",
-    ]);
+    test("it navigate user to JobResults page", async () => {
+      const { jobStore, $router } = renderJobFiltersSidebarOrganizations();
+      jobStore.UNIQUE_ORGANIZATIONS = new Set(["google"]);
+      const CollapsibleAccordionHeader = screen.getByRole("button", {
+        name: /organizations/i,
+      });
+      await userEvent.click(CollapsibleAccordionHeader);
+      const googleCheckbox = screen.getByRole("checkbox", {
+        name: "google",
+      });
+      await userEvent.click(googleCheckbox);
+      expect($router.push).toHaveBeenCalledWith({ name: "JobResults" });
+    });
   });
 });

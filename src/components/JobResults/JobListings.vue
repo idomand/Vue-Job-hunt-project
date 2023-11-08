@@ -1,29 +1,28 @@
 <template>
   <main class="flex-auto bg-brand-gray-2 p-8">
+    <div class="flex flex-row flex-nowrap">
+      <div class="flex justify-between items-center">
+        <router-link
+          v-if="previousPage"
+          role="link"
+          :to="{ name: JobResults, query: { page: previousPage } }"
+          class="mx-3 text-sm font-semibold text-brand-blue-1"
+          >Previous
+        </router-link>
+        <router-link
+          v-if="nextPage"
+          role="link"
+          :to="{ name: JobResults, query: { page: nextPage } }"
+          class="mx-3 text-sm font-semibold text-brand-blue-1"
+          >Next
+        </router-link>
+      </div>
+      <p class="flex-grow text-sm">page {{ currentPage }}</p>
+    </div>
     <ol>
       <job-listing v-for="job in displayedJobs" :key="job.id" :job="job" />
     </ol>
-    <div class="mx-auto mt-8">
-      <div class="flex flex-row flex-nowrap">
-        <div class="flex justify-between items-center">
-          <router-link
-            v-if="previousPage"
-            role="link"
-            :to="{ name: JobResults, query: { page: previousPage } }"
-            class="mx-3 text-sm font-semibold text-brand-blue-1"
-            >Previous
-          </router-link>
-          <router-link
-            v-if="nextPage"
-            role="link"
-            :to="{ name: JobResults, query: { page: nextPage } }"
-            class="mx-3 text-sm font-semibold text-brand-blue-1"
-            >Next
-          </router-link>
-        </div>
-        <p class="flex-grow text-sm">page {{ currentPage }}</p>
-      </div>
-    </div>
+    <div class="mx-auto mt-8"></div>
   </main>
 </template>
 
