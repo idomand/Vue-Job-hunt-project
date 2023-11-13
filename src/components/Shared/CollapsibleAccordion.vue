@@ -15,13 +15,31 @@
 </template>
 
 <script>
+import { ref, computed } from "vue";
 export default {
   name: "CollapsibleAccordion",
-
   props: {
-    header: { require: true, type: String },
+    header: { type: String, require: true },
   },
+  setup() {
+    const isOpen = ref(false);
+    const open = () => {
+      isOpen.value = !isOpen.value;
+    };
+    const caretIcon = computed(() => {
+      return isOpen.value ? ["fas", "angle-up"] : ["fas", "angle-down"];
+    });
+    return { caretIcon, open, isOpen };
+  },
+};
+</script>
 
+<!-- <script>
+export default {
+  name: "CollapsibleAccordion",
+  props: {
+    header: { type: String, require: true },
+  },
   data() {
     return {
       isOpen: false,
@@ -38,4 +56,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->
