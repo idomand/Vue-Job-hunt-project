@@ -23,7 +23,24 @@
   </form>
 </template>
 
-<script>
+<script setup>
+import ActionButton from "../Shared/ActionButton.vue";
+import TextInput from "../Shared/TextInput.vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+const role = ref("");
+const location = ref("");
+const router = useRouter();
+
+const searchForJobs = () => {
+  router.push({
+    name: "JobResults",
+    query: { role: role.value, location: location.value },
+  });
+};
+</script>
+
+<!-- <script>
 import ActionButton from "../Shared/ActionButton.vue";
 import TextInput from "../Shared/TextInput.vue";
 export default {
@@ -44,4 +61,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->
