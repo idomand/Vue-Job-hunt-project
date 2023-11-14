@@ -1,19 +1,21 @@
 import userEvent from "@testing-library/user-event";
 import { renderComponent, screen } from "../../../setup.js";
+import { useRouter } from "vue-router";
 
 import TheJobSearchForm from "../../../../src/components/JobSearch/TheJobSearchForm.vue";
+
+vi.mock("vue-router");
 
 describe("TheJobSearchForm", () => {
   describe("when user Submit form", () => {
     test("it should move user to job results page with user search prams", async () => {
       const push = vi.fn();
 
-      const $router = { push };
+      // const $router = { push };
+      useRouter.mockReturnValue({ push });
 
       renderComponent(TheJobSearchForm, {
-        global: {
-          mocks: { $router: $router },
-        },
+        global: {},
       });
 
       const roleTextInput = screen.getByRole("textbox", { name: /role/i });

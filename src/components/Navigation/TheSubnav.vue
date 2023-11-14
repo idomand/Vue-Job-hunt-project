@@ -12,7 +12,21 @@
   </div>
 </template>
 
-<script>
+<script setup>
+// import { mapState } from "pinia";
+import useJobStore from "../../stores/jobs";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+
+const onJobResultsPage = computed(() => {
+  return route.name === "JobResults";
+});
+
+const jobStore = useJobStore();
+const FILTERED_JOBS = computed(() => jobStore.FILTERED_JOBS);
+</script>
+<!-- <script>
 import { mapState } from "pinia";
 import useJobStore, { FILTERED_JOBS } from "../../stores/jobs";
 
@@ -27,4 +41,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->
