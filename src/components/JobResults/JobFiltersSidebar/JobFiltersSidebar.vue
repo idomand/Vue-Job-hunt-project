@@ -10,23 +10,31 @@
         </div>
       </div>
 
-      <JobFiltersSidebarOrganizations />
-      <JobFiltersSidebarJobType />
+      <JobFilterSidebarCheckboxGroup
+        header="Job types"
+        :action="userStore.ADD_SELECTED_JOB_TYPES"
+        :unique-values="UNIQUE_JOB_TYPES"
+      />
+      <JobFilterSidebarCheckboxGroup
+        header="Organizations"
+        :action="userStore.ADD_SELECTED_ORGANIZATION"
+        :unique-values="UNIQUE_ORGANIZATIONS"
+      />
     </section>
   </div>
 </template>
 
-<script>
-import ActionButton from "../../Shared/ActionButton.vue";
-import JobFiltersSidebarOrganizations from "./JobFiltersSidebarOrganizations.vue";
-import JobFiltersSidebarJobType from "./JobFiltersSidebarJobType.vue";
+<script setup>
+import { computed } from "vue";
 
-export default {
-  name: "JobFiltersSidebar",
-  components: {
-    ActionButton,
-    JobFiltersSidebarOrganizations,
-    JobFiltersSidebarJobType,
-  },
-};
+import ActionButton from "../../Shared/ActionButton.vue";
+import JobFilterSidebarCheckboxGroup from "./JobFilterSidebarCheckboxGroup.vue";
+import useUserStore from "../../../stores/user";
+import useJobStore from "../../../stores/jobs";
+
+const userStore = useUserStore();
+const jobStore = useJobStore();
+
+const UNIQUE_ORGANIZATIONS = computed(() => jobStore.UNIQUE_ORGANIZATIONS);
+const UNIQUE_JOB_TYPES = computed(() => jobStore.UNIQUE_JOB_TYPES);
 </script>

@@ -3,14 +3,16 @@ import MainNav from "@/components/Navigation/MainNav.vue";
 import { renderComponent, screen } from "../../../setup.js";
 import { createTestingPinia } from "@pinia/testing";
 import useUserStore from "../../../../src/stores/user.js";
+import { useRoute } from "vue-router";
+vi.mock("vue-router");
 
 describe("MainNav", () => {
   const pinia = createTestingPinia({ stubActions: true });
   const renderMainNav = () => {
-    const $route = { name: "Home" };
+    useRoute.mockReturnValue({ name: "Home" });
+
     renderComponent(MainNav, {
       global: {
-        mocks: { $route: $route },
         Plugin: [pinia],
       },
     });
@@ -42,7 +44,6 @@ describe("MainNav", () => {
   it("when the user logs in --displays user profile picture", async () => {
     renderMainNav();
     const userStore = useUserStore();
-
     let profileImage = screen.queryByRole("img", {
       name: /user profile image/i,
     });
