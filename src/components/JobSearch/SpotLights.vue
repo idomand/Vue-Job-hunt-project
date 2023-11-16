@@ -11,7 +11,18 @@
     </li>
   </ul>
 </template>
-<script>
+<script setup>
+import { ref, onMounted } from "vue";
+import getSpotlights from "../../api/getSpotlights";
+
+const spotlights = ref([]);
+
+onMounted(async () => {
+  spotlights.value = await getSpotlights();
+});
+</script>
+
+<!-- <script>
 import getSpotlights from "../../api/getSpotlights";
 export default {
   name: "SpotLights",
@@ -24,4 +35,4 @@ export default {
     this.spotlights = await getSpotlights();
   },
 };
-</script>
+</script> -->

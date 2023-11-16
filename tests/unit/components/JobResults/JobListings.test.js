@@ -5,8 +5,11 @@ import useJobStore from "../../../../src/stores/jobs.js";
 import { renderComponent } from "../../../setup.js";
 import { screen } from "@testing-library/vue";
 import { createTestingPinia } from "@pinia/testing";
+
+import { useRoute } from "vue-router";
+
 describe("JobListings", () => {
-  vi.mock("axios");
+  vi.mock("vue-router");
 
   function renderJobListings(queryParams = {}) {
     const pinia = createTestingPinia();

@@ -26,6 +26,43 @@
   </main>
 </template>
 
+<script setup>
+import { computed, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import JobListing from "@/components/JobResults/JobListing.vue";
+import useJobStore from "../../stores/jobs";
+
+const jobStore = useJobStore();
+const route = useRoute();
+const jobsPerPage = 10;
+
+const currentPage = computed(() => {
+  return Number.parseInt(route.query.page || "1");
+});
+const previousPage = computed(() => {
+  const previousPage = currentPage.value - 1;
+  const firstPage = 1;
+  return previousPage >= firstPage ? previousPage : undefined;
+});
+const nextPage = computed(() => {
+  const nextPage = currentPage.value + 1;
+  const maxPage = Math.ceil(jobStore.FILTERED_JOBS.length / jobsPerPage);
+  return nextPage <= maxPage ? nextPage : undefined;
+});
+
+const displayedJobs = computed(() => {
+  const pageNumber = currentPage.value;
+  const firstJobIndex = (pageNumber - 1) * jobsPerPage;
+  const lastJobIndex = pageNumber * jobsPerPage;
+  return jobStore.FILTERED_JOBS.slice(firstJobIndex, lastJobIndex);
+});
+
+onMounted(() => {
+  jobStore.FETCH_JOBS();
+});
+</script>
+
+<!-- 
 <script>
 import JobListing from "@/components/JobResults/JobListing.vue";
 import useJobStore, { FETCH_JOBS, FILTERED_JOBS } from "../../stores/jobs";
@@ -73,4 +110,4 @@ export default {
     ...mapActions(useJobStore, [FETCH_JOBS]),
   },
 };
-</script>
+</script> -->
