@@ -1,7 +1,7 @@
 // import { render, screen } from "@testing-library/vue";
 import { renderComponent, screen } from "../../../setup.js";
 import { createTestingPinia } from "@pinia/testing";
-import useJobsStore from "../../../../src/stores/jobs.js";
+import useJobsStore from "../../../../src/stores/jobs.ts";
 // import { useRoute } from "vue-router";
 // vi.mock("vue-router");
 import { useRoute } from "vue-router";

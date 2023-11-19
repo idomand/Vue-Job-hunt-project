@@ -1,5 +1,5 @@
 import { beforeEach, expect } from "vitest";
-import useUserStore from "../../../src/stores/user.js";
+import useUserStore from "../../../src/stores/user.ts";
 import { createPinia, setActivePinia } from "pinia";
 
 describe("userStore", () => {
