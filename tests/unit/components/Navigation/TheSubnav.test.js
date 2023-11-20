@@ -1,5 +1,5 @@
 // import { render, screen } from "@testing-library/vue";
-import { renderComponent, screen } from "../../../setup.js";
+import { renderComponent, screen } from "../../../setup.ts";
 import { createTestingPinia } from "@pinia/testing";
 import useJobsStore from "../../../../src/stores/jobs.ts";
 // import { useRoute } from "vue-router";

@@ -1,10 +1,11 @@
-import { render, screen } from "@testing-library/vue";
+// import { render, screen } from "@testing-library/vue";
+import { renderComponent, screen } from "../../../setup.ts";
 
 import ActionButton from "@/components/Shared/ActionButton.vue";
 
 describe("ActionButton", () => {
   it("renders text", () => {
-    render(ActionButton, {
+    renderComponent(ActionButton, {
       props: {
         text: "Click me",
         type: "primary",
@@ -18,7 +19,7 @@ describe("ActionButton", () => {
   });
 
   it("applies one of several styles to button", () => {
-    render(ActionButton, {
+    renderComponent(ActionButton, {
       props: {
         text: "Click me",
         type: "primary",

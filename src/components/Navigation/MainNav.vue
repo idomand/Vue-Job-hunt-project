@@ -35,7 +35,32 @@
   </header>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import useUserStore from "../../stores/user";
+import ActionButton from "@/components/Shared/ActionButton.vue";
+import ProfileImage from "@/components/Navigation/ProfileImage.vue";
+import TheSubnav from "@/components/Navigation/TheSubnav.vue";
+const userStore = useUserStore();
+const isLoggedIn = computed(() => userStore.isLoggedIn);
+const LOGIN_USER = userStore.LOGIN_USER;
+const menuItems = ref([
+  { text: "Teams", url: "/teams" },
+  { text: "Locations", url: "/" },
+  { text: "Life at Bobo Corp", url: "/" },
+  { text: "How we hire", url: "/" },
+  { text: "Students", url: "/" },
+  { text: "Jobs", url: "/jobs/results" },
+]);
+const headerHeightClass = computed(() => {
+  return {
+    "h-16": !isLoggedIn.value,
+    "h-32": isLoggedIn.value,
+  };
+});
+</script>
+
+<!-- <script>
 import { mapActions, mapState } from "pinia";
 import useUserStore, { LOGIN_USER } from "../../stores/user";
 
@@ -76,4 +101,4 @@ export default {
     ...mapActions(useUserStore, [LOGIN_USER]),
   },
 };
-</script>
+</script> -->

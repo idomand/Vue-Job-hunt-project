@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event";
-import { renderComponent, screen } from "../../../setup.js";
+import { renderComponent, screen } from "../../../setup.ts";
 import { useRouter } from "vue-router";
 
 import TheJobSearchForm from "../../../../src/components/JobSearch/TheJobSearchForm.vue";

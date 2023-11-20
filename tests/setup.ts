@@ -9,7 +9,7 @@ afterEach(() => {
 });
 export * from "@testing-library/vue";
 
-export function renderComponent(element, options = {}) {
+export function renderComponent(element: any, options = {}) {
   const defaultOptions = {
     global: {
       stubs: {

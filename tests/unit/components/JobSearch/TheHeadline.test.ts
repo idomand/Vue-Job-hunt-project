@@ -1,5 +1,5 @@
 import { nextTick } from "vue";
-import { renderComponent, screen } from "../../../setup.js";
+import { renderComponent, screen } from "../../../setup.ts";
 
 import TheHeadline from "@/components/JobSearch/TheHeadline.vue";
 

@@ -1,4 +1,4 @@
-import { renderComponent, screen } from "../../../setup.js";
+import { renderComponent, screen } from "../../../setup.ts";
 import CollapsibleAccordion from "../../../../src/components/Shared/CollapsibleAccordion.vue";
 import userEvent from "@testing-library/user-event";
 

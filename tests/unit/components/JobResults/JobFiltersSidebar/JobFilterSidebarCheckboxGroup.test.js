@@ -1,5 +1,5 @@
 import JobFilterSidebarCheckboxGroup from "../../../../../src/components/JobResults/JobFiltersSidebar/JobFilterSidebarCheckboxGroup.vue";
-import { renderComponent, screen } from "../../../../setup.js";
+import { renderComponent, screen } from "../../../../setup.ts";
 import { createTestingPinia } from "@pinia/testing";
 import userEvent from "@testing-library/user-event";
 import { useRouter } from "vue-router";

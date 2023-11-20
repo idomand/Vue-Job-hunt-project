@@ -1,4 +1,4 @@
-import { renderComponent, screen } from "../../../setup.js";
+import { renderComponent, screen } from "../../../setup.ts";
 import { vi } from "vitest";
 import SpotLights from "../../../../src/components/JobSearch/SpotLights.vue";
 import axios from "axios";

@@ -9,7 +9,32 @@
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, computed, onBeforeMount, onMounted } from "vue";
+import nextElementInList from "@/utils/nextElementInList";
+const action = ref("Build");
+const interval = ref<ReturnType<typeof setInterval>>();
+
+const actionClasses = computed(() => {
+  return {
+    [action.value.toLowerCase()]: true,
+  };
+});
+const changeTitle = () => {
+  interval.value = setInterval(() => {
+    const actions = ["Build", "Create", "Design", "Code"];
+    action.value = nextElementInList(actions, action.value);
+  }, 3000);
+};
+onBeforeMount(() => {
+  clearInterval(interval.value);
+});
+onMounted(() => {
+  changeTitle();
+});
+</script>
+
+<!-- <script>
 import nextElementInList from "@/utils/nextElementInList";
 
 export default {
@@ -42,7 +67,7 @@ export default {
     },
   },
 };
-</script>
+</script> -->
 
 <style scoped>
 .build {

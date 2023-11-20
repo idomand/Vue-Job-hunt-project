@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import MainNav from "@/components/Navigation/MainNav.vue";
-import { renderComponent, screen } from "../../../setup.js";
+import { renderComponent, screen } from "../../../setup.ts";
 import { createTestingPinia } from "@pinia/testing";
 import useUserStore from "../../../../src/stores/user.ts";
 import { useRoute } from "vue-router";

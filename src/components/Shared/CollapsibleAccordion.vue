@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 defineProps({ header: { type: String, require: true } });
 const isOpen = ref(false);

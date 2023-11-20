@@ -1,4 +1,4 @@
-import { renderComponent, screen } from "../../../setup.js";
+import { renderComponent, screen } from "../../../setup.ts";
 import HeaderContainer from "../../../../src/components/Shared/HeaderContainer.vue";
 
 describe("HeaderContainer", () => {

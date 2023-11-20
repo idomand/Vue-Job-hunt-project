@@ -6,8 +6,16 @@
   />
 </template>
 
-<script>
-export default {
+<script setup lang="ts">
+import { ref } from "vue";
+const imageLink = ref(
+  "https://www.pngitem.com/pimgs/m/487-4876417_link-head-png-toon-link-face-png-transparent.png",
+);
+</script>
+
+<!-- <script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "ProfileImage",
   data() {
     return {
@@ -15,5 +23,5 @@ export default {
         "https://www.pngitem.com/pimgs/m/487-4876417_link-head-png-toon-link-face-png-transparent.png",
     };
   },
-};
-</script>
+});
+</script> -->

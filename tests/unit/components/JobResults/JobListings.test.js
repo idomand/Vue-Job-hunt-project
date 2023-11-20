@@ -2,7 +2,7 @@ import JobListings from "../../../../src/components/JobResults/JobListings.vue";
 import { expect, vi } from "vitest";
 // import axios from "axios";
 import useJobStore from "../../../../src/stores/jobs.ts";
-import { renderComponent } from "../../../setup.js";
+import { renderComponent } from "../../../setup.ts";
 import { screen } from "@testing-library/vue";
 import { createTestingPinia } from "@pinia/testing";
 
