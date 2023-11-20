@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // import { mapState } from "pinia";
 import useJobStore from "../../stores/jobs";
 import { computed } from "vue";
