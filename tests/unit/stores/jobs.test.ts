@@ -7,7 +7,7 @@ import { createPinia, setActivePinia } from "pinia";
 import axios from "axios";
 const axiosGetMock = axios.get as Mock;
 
-import type { Job } from "../../../src/api/types.js";
+import { createJob } from "../utils/createJob.ts";
 
 describe("jobsStore", () => {
   vi.mock("axios");
@@ -32,22 +32,6 @@ describe("jobsStore", () => {
   });
 
   describe("getters", () => {
-    const createJob = (job: Partial<Job> = {}): Job => {
-      return {
-        id: 1,
-        title: "Angular Developer",
-        organization: "Vue and Me",
-        degree: "Master's",
-        jobType: "Intern",
-        locations: ["Lisbon"],
-        minimumQualifications: ["synergize B2C initiatives"],
-        preferredQualifications: [" and disintermediate intuitive niches"],
-        description: ["Away someone forget effect wait land."],
-        dateAdded: "2021-07-04",
-        ...job,
-      };
-    };
-
     describe("ORGANIZATIONS", () => {
       test("get UNIQUE_ORGANIZATIONS from list of jobs", () => {
         const jobStore = useJobStore();

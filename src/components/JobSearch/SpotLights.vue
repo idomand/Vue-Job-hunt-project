@@ -11,11 +11,12 @@
     </li>
   </ul>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
+import type { SpotlightsType } from "../../api/types";
 import getSpotlights from "../../api/getSpotlights";
 
-const spotlights = ref([]);
+const spotlights = ref<SpotlightsType[]>([]);
 
 onMounted(async () => {
   spotlights.value = await getSpotlights();

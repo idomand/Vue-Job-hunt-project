@@ -5,14 +5,14 @@
         <router-link
           v-if="previousPage"
           role="link"
-          :to="{ name: JobResults, query: { page: previousPage } }"
+          :to="{ name: 'JobResults', query: { page: previousPage } }"
           class="mx-3 text-sm font-semibold text-brand-blue-1"
           >Previous
         </router-link>
         <router-link
           v-if="nextPage"
           role="link"
-          :to="{ name: JobResults, query: { page: nextPage } }"
+          :to="{ name: 'JobResults', query: { page: nextPage } }"
           class="mx-3 text-sm font-semibold text-brand-blue-1"
           >Next
         </router-link>
@@ -26,7 +26,7 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import JobListing from "@/components/JobResults/JobListing.vue";
@@ -37,7 +37,7 @@ const route = useRoute();
 const jobsPerPage = 10;
 
 const currentPage = computed(() => {
-  return Number.parseInt(route.query.page || "1");
+  return Number.parseInt((route.query.page as string) || "1");
 });
 const maxPage = computed(() =>
   Math.ceil(jobStore.FILTERED_JOBS.length / jobsPerPage),

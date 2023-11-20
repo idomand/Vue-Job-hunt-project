@@ -3,8 +3,9 @@
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "tests/**/*"],
   "exclude": [],
   "compilerOptions": {
-    "emitDeclarationOnly":true,
-    "allowImportingTsExtensions":true,
+    "verbatimModuleSyntax": "preserve",
+    "emitDeclarationOnly": true,
+    "allowImportingTsExtensions": true,
     "composite": true,
     "baseUrl": ".",
     "paths": {

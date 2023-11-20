@@ -11,7 +11,7 @@ export interface Job {
   dateAdded: string;
 }
 
-export interface Spotlights {
+export interface SpotlightsType {
   id: number;
   img: string;
   title: string;

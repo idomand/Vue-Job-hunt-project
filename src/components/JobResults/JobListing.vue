@@ -50,10 +50,13 @@
   </li>
 </template>
 
-<script setup>
-import { computed } from "vue";
+<script setup lang="ts">
+import { computed, PropType } from "vue";
+import { Job } from "../../api/types";
 
-const props = defineProps({ job: { required: true, type: Object } });
+const props = defineProps({
+  job: { required: true, type: Object as PropType<Job> },
+});
 
 const jobPageLink = computed(() => `/jobs/results/${props.job.id}`);
 </script>

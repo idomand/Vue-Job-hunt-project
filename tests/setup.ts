@@ -2,6 +2,7 @@ import "@testing-library/jest-dom/vitest";
 import { cleanup, render } from "@testing-library/vue";
 import { afterEach } from "vitest";
 import { RouterLinkStub } from "@vue/test-utils";
+///@ts-ignore
 import merge from "lodash/merge";
 
 afterEach(() => {
