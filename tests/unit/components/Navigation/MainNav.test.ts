@@ -6,10 +6,13 @@ import useUserStore from "../../../../src/stores/user.ts";
 import { useRoute } from "vue-router";
 vi.mock("vue-router");
 
+import { Mock } from "vitest";
 describe("MainNav", () => {
+  const useMockRoute = useRoute as Mock;
+
   const pinia = createTestingPinia({ stubActions: true });
   const renderMainNav = () => {
-    useRoute.mockReturnValue({ name: "Home" });
+    useMockRoute.mockReturnValue({ name: "Home" });
 
     renderComponent(MainNav, {
       global: {
