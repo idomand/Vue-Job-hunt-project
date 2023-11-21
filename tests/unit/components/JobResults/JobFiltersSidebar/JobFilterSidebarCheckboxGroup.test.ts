@@ -8,15 +8,16 @@ vi.mock("vue-router");
 
 interface JobFilterSidebarCheckboxProps {
   header: string;
-  uniqueValues: new Set(["valueA", "valueB"]),
-  action: vi.fn(),
-
+  uniqueValues: Set<string>;
+  action: Mock;
 }
 
 describe("JobFilterSidebarCheckboxGroup", () => {
   const useMockRouter = useRouter as Mock;
 
-  function createProps(props = {}) {
+  function createProps(
+    props: Partial<JobFilterSidebarCheckboxProps> = {},
+  ): JobFilterSidebarCheckboxProps {
     return {
       header: "some header",
       uniqueValues: new Set(["valueA", "valueB"]),
@@ -25,7 +26,9 @@ describe("JobFilterSidebarCheckboxGroup", () => {
     };
   }
 
-  function renderJobFilterSidebarCheckboxGroup(props) {
+  function renderJobFilterSidebarCheckboxGroup(
+    props: JobFilterSidebarCheckboxProps,
+  ) {
     const pinia = createTestingPinia();
     renderComponent(JobFilterSidebarCheckboxGroup, {
       props: { ...props },
