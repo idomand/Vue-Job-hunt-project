@@ -4,16 +4,17 @@ import { useRouter } from "vue-router";
 
 import TheJobSearchForm from "../../../../src/components/JobSearch/TheJobSearchForm.vue";
 
+import { Mock } from "vitest";
+
 vi.mock("vue-router");
 
 describe("TheJobSearchForm", () => {
+  const useMockRouter = useRouter as Mock;
+
   describe("when user Submit form", () => {
     test("it should move user to job results page with user search prams", async () => {
       const push = vi.fn();
-
-      // const $router = { push };
-      useRouter.mockReturnValue({ push });
-
+      useMockRouter.mockReturnValue({ push });
       renderComponent(TheJobSearchForm, {
         global: {},
       });

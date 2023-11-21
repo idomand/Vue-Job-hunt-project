@@ -3,14 +3,10 @@
   <h1>{{ currentJobId }}</h1>
 </template>
 
-<script>
-export default {
-  name: "JobView",
+<script lang="ts" setup>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
 
-  computed: {
-    currentJobId() {
-      return this.$route.params.id;
-    },
-  },
-};
+const currentJobId = computed(() => route.params.id);
 </script>

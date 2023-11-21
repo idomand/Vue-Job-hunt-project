@@ -23,7 +23,7 @@
   </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ActionButton from "../Shared/ActionButton.vue";
 import TextInput from "../Shared/TextInput.vue";
 import { ref } from "vue";
