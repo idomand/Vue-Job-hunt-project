@@ -1,9 +1,9 @@
+import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, expect, vi } from "vitest";
 import useJobStore from "../../../src/stores/jobs.js";
 import useUserStore from "../../../src/stores/user.js";
 import type { Mock } from "vitest";
 
-import { createPinia, setActivePinia } from "pinia";
 import axios from "axios";
 const axiosGetMock = axios.get as Mock;
 
@@ -100,6 +100,29 @@ describe("jobsStore", () => {
           const jobStore = useJobStore();
           const job = createJob({ jobType: "Part-time" });
           const result = jobStore.INCLUDE_JOB_BY_JOB_TYPE(job);
+          expect(result).toBe(true);
+        });
+      });
+    });
+
+    describe("DEGREES", () => {
+      describe("INCLUDE_JOB_BY_DEGREES", () => {
+        describe("when the user has not selected any DEGREES", () => {
+          test("it includes job", () => {
+            const userStore = useUserStore();
+            userStore.selectedDegrees = [];
+            const jobStore = useJobStore();
+            const job = createJob({ degree: "Associate" });
+            const result = jobStore.INCLUDE_JOB_BY_Degree(job);
+            expect(result).toBe(true);
+          });
+        });
+        test("it identifies if job is associated with givin organization", () => {
+          const userStore = useUserStore();
+          userStore.selectedDegrees = ["Associate", "Bachelor"];
+          const jobStore = useJobStore();
+          const job = createJob({ degree: "Associate" });
+          const result = jobStore.INCLUDE_JOB_BY_Degree(job);
           expect(result).toBe(true);
         });
       });

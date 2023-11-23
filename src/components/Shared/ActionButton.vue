@@ -25,6 +25,7 @@ const buttonClass = computed(() => {
   return { [type.value]: true };
 });
 </script>
+
 <style scoped>
 button {
   @apply px-5 py-3 font-medium;

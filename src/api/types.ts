@@ -17,3 +17,8 @@ export interface SpotlightsType {
   title: string;
   description: string;
 }
+
+export interface DegreesType {
+  id: number;
+  degree: string;
+}

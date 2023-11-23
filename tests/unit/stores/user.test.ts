@@ -20,6 +20,11 @@ describe("userStore", () => {
       const userStore = useUserStore();
       expect(userStore.selectedJobTypes).toEqual([]);
     });
+
+    test("it stores DEGREES that the user filter by", () => {
+      const userStore = useUserStore();
+      expect(userStore.selectedDegrees).toEqual([]);
+    });
   });
 
   describe("user actions", () => {
@@ -40,6 +45,12 @@ describe("userStore", () => {
       const userStore = useUserStore();
       userStore.ADD_SELECTED_JOB_TYPES(["type1", "type2"]);
       expect(userStore.selectedJobTypes).toEqual(["type1", "type2"]);
+    });
+
+    test("ADD_SELECTED_Degrees -- updates Degrees the user chose", () => {
+      const userStore = useUserStore();
+      userStore.ADD_SELECTED_Degrees(["type1", "type2"]);
+      expect(userStore.selectedDegrees).toEqual(["type1", "type2"]);
     });
   });
 });
