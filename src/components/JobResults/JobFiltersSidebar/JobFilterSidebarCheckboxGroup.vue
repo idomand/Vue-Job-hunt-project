@@ -24,6 +24,9 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import CollapsibleAccordion from "../../Shared/CollapsibleAccordion.vue";
+import useUserStore from "../../../stores/user";
+
+const userStore = useUserStore();
 
 const router = useRouter();
 
@@ -38,4 +41,12 @@ function selectValue() {
   props.action(selectedValues.value);
   router.push({ name: "JobResults" });
 }
+
+userStore.$onAction(({ after, name }) => {
+  after(() => {
+    if (name == "CLEAR_USER_JOB_FILTER_SELECTIONS") {
+      selectedValues.value = [];
+    }
+  });
+});
 </script>

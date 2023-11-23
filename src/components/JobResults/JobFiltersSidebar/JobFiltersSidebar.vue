@@ -6,7 +6,11 @@
       <div class="flex flex-row justify-between">
         <h3 class="my-4 text-base font-semibold">what would you like to do</h3>
         <div class="flex items-center text-sm">
-          <ActionButton text="Clear Filters" type="secondary" />
+          <ActionButton
+            text="Clear Filters"
+            type="secondary"
+            @click="userStore.CLEAR_USER_JOB_FILTER_SELECTIONS"
+          />
         </div>
       </div>
 
