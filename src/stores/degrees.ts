@@ -5,6 +5,7 @@ import { ref, computed } from "vue";
 
 export const useDegreesStore = defineStore("Degrees", () => {
   const degrees = ref<DegreesType[]>([]);
+
   const FETCH_DEGREES = async () => {
     const receivedDegrees = await getDegrees();
     degrees.value = receivedDegrees;

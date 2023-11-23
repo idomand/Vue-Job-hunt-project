@@ -32,7 +32,10 @@ import { useRoute } from "vue-router";
 import JobListing from "@/components/JobResults/JobListing.vue";
 import useJobStore from "../../stores/jobs";
 import usePreviousAndNextPages from "../../composables/usePreviousAndNextPages";
+import { useDegreesStore } from "../../stores/degrees";
+
 const jobStore = useJobStore();
+const degreeStore = useDegreesStore();
 const route = useRoute();
 const jobsPerPage = 10;
 
@@ -57,6 +60,7 @@ const displayedJobs = computed(() => {
 
 onMounted(() => {
   jobStore.FETCH_JOBS();
+  degreeStore.FETCH_DEGREES();
 });
 </script>
 
