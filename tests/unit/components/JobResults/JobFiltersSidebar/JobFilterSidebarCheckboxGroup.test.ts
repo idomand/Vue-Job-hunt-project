@@ -5,9 +5,8 @@ import { createTestingPinia } from "@pinia/testing";
 import userEvent from "@testing-library/user-event";
 import { useRouter } from "vue-router";
 vi.mock("vue-router");
-
+import useUserStore from "../../../../../src/stores/user.ts";
 interface JobFilterSidebarCheckboxProps {
-  header: string;
   uniqueValues: Set<string>;
   action: Mock;
 }
@@ -19,7 +18,6 @@ describe("JobFilterSidebarCheckboxGroup", () => {
     props: Partial<JobFilterSidebarCheckboxProps> = {},
   ): JobFilterSidebarCheckboxProps {
     return {
-      header: "some header",
       uniqueValues: new Set(["valueA", "valueB"]),
       action: vi.fn(),
       ...props,
@@ -29,26 +27,23 @@ describe("JobFilterSidebarCheckboxGroup", () => {
   function renderJobFilterSidebarCheckboxGroup(
     props: JobFilterSidebarCheckboxProps,
   ) {
-    const pinia = createTestingPinia();
+    const pinia = createTestingPinia({ stubActions: false });
+    const userStore = useUserStore();
+
     renderComponent(JobFilterSidebarCheckboxGroup, {
       props: { ...props },
       global: {
         plugins: [pinia],
       },
     });
+    return { userStore };
   }
-  test("render UNIQUE list of Values", async () => {
+  test("render UNIQUE list of Values", () => {
     const props = createProps({
-      header: "Job Types",
       uniqueValues: new Set(["Intern", "Temporary"]),
     });
-    renderJobFilterSidebarCheckboxGroup(props);
+    const { userStore } = renderJobFilterSidebarCheckboxGroup(props);
 
-    const CollapsibleAccordionHeader = screen.getByRole("button", {
-      name: /Job Types/i,
-    });
-
-    await userEvent.click(CollapsibleAccordionHeader);
     const jobTypesListItems = screen.getAllByRole("listitem");
 
     const jobTypes = jobTypesListItems.map((element) => {
@@ -62,16 +57,11 @@ describe("JobFilterSidebarCheckboxGroup", () => {
       useMockRouter.mockReturnValue({ push: vi.fn() });
       const action = vi.fn();
       const props = createProps({
-        header: "Job Types",
         uniqueValues: new Set(["Intern", "Temporary"]),
         action: action,
       });
 
       renderJobFilterSidebarCheckboxGroup(props);
-      const CollapsibleAccordionHeader = screen.getByRole("button", {
-        name: /Job types/i,
-      });
-      await userEvent.click(CollapsibleAccordionHeader);
       const temporaryCheckbox = screen.getByRole("checkbox", {
         name: "Temporary",
       });
@@ -83,20 +73,37 @@ describe("JobFilterSidebarCheckboxGroup", () => {
       useMockRouter.mockReturnValue({ push });
       const action = vi.fn();
       const props = createProps({
-        header: "Job Types",
         uniqueValues: new Set(["Intern", "Temporary"]),
         action: action,
       });
       renderJobFilterSidebarCheckboxGroup(props);
-      const CollapsibleAccordionHeader = screen.getByRole("button", {
-        name: /Job types/i,
-      });
-      await userEvent.click(CollapsibleAccordionHeader);
       const InternCheckbox = screen.getByRole("checkbox", {
         name: "Intern",
       });
       await userEvent.click(InternCheckbox);
       expect(push).toHaveBeenCalledWith({ name: "JobResults" });
+    });
+  });
+  describe("when user clear job filter", () => {
+    test("it uncheck all checkboxes", async () => {
+      useMockRouter.mockReturnValue({ push: vi.fn() });
+      const action = vi.fn();
+
+      const props = createProps({
+        uniqueValues: new Set(["Intern", "Temporary"]),
+        action: action,
+      });
+      const { userStore } = renderJobFilterSidebarCheckboxGroup(props);
+      const InternCheckbox = screen.getByRole<HTMLInputElement>("checkbox", {
+        name: "Intern",
+      });
+
+      await userEvent.click(InternCheckbox);
+      expect(InternCheckbox.checked).toBe(true);
+
+      await userStore.CLEAR_USER_JOB_FILTER_SELECTIONS();
+
+      expect(InternCheckbox.checked).toBe(false);
     });
   });
 });
