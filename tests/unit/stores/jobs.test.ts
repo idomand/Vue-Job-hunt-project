@@ -127,5 +127,32 @@ describe("jobsStore", () => {
         });
       });
     });
+
+    describe("INCLUDE_JOB_BY_SKILLS", () => {
+      test("identifies if job matches user's skill", () => {
+        const userStore = useUserStore();
+        const jobStore = useJobStore();
+        userStore.skillsSearchTerm = "Vue";
+        const newJob = createJob({ title: "Vue developer" });
+        const results = jobStore.INCLUDE_JOB_BY_SKILLS(newJob);
+        expect(results).toBe(true);
+      });
+      test("it handle inconsistences in casing", () => {
+        const userStore = useUserStore();
+        const jobStore = useJobStore();
+        userStore.skillsSearchTerm = "vue";
+        const newJob = createJob({ title: "Vue developer" });
+        const results = jobStore.INCLUDE_JOB_BY_SKILLS(newJob);
+        expect(results).toBe(true);
+      });
+      test("if the skillsSearchTerm is empty ", () => {
+        const userStore = useUserStore();
+        const jobStore = useJobStore();
+        userStore.skillsSearchTerm = "";
+        const newJob = createJob({ title: "Vue developer" });
+        const results = jobStore.INCLUDE_JOB_BY_SKILLS(newJob);
+        expect(results).toBe(true);
+      });
+    });
   });
 });

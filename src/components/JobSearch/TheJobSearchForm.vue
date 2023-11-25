@@ -31,6 +31,7 @@ import { useRouter } from "vue-router";
 const role = ref("");
 const location = ref("");
 const router = useRouter();
+
 const searchForJobs = () => {
   router.push({
     name: "JobResults",

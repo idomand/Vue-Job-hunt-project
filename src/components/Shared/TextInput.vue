@@ -12,7 +12,7 @@ import { defineProps, defineEmits } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
 
-const props = defineProps({
+defineProps({
   modelValue: { type: String, required: true },
 });
 const handleInput = ($event: Event) => {

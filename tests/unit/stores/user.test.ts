@@ -25,9 +25,21 @@ describe("userStore", () => {
       const userStore = useUserStore();
       expect(userStore.selectedDegrees).toEqual([]);
     });
+
+    test("it stores user search term for skills", () => {
+      const userStore = useUserStore();
+      expect(userStore.skillsSearchTerm).toEqual("");
+    });
   });
 
   describe("user actions", () => {
+    test("UPDATE_SKILLS_SEARCH_TERM ", () => {
+      const userStore = useUserStore();
+      expect(userStore.skillsSearchTerm).toBe("");
+      userStore.UPDATE_SKILLS_SEARCH_TERM("new text");
+      expect(userStore.skillsSearchTerm).toBe("new text");
+    });
+
     test("logs the user in", () => {
       const userStore = useUserStore();
       expect(userStore.isLoggedIn).toBe(false);
@@ -58,11 +70,13 @@ describe("userStore", () => {
       userStore.selectedDegrees = ["degree1", "degree2"];
       userStore.selectedJobTypes = ["type1", "type2"];
       userStore.selectedOrganizations = ["org1", "org2"];
+      userStore.skillsSearchTerm = "test";
 
       userStore.CLEAR_USER_JOB_FILTER_SELECTIONS();
       expect(userStore.selectedDegrees).toEqual([]);
       expect(userStore.selectedJobTypes).toEqual([]);
       expect(userStore.selectedOrganizations).toEqual([]);
+      expect(userStore.skillsSearchTerm).toBe("");
     });
   });
 });

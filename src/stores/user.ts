@@ -12,6 +12,7 @@ const useUserStore = defineStore("user", () => {
   const selectedOrganizations = ref<string[]>([]);
   const selectedJobTypes = ref<string[]>([]);
   const selectedDegrees = ref<string[]>([]);
+  const skillsSearchTerm = ref("");
 
   const LOGIN_USER = () => {
     isLoggedIn.value = true;
@@ -29,9 +30,15 @@ const useUserStore = defineStore("user", () => {
     selectedDegrees.value = [];
     selectedJobTypes.value = [];
     selectedOrganizations.value = [];
+    skillsSearchTerm.value = "";
+  };
+
+  const UPDATE_SKILLS_SEARCH_TERM = (newSearchTerm: string) => {
+    skillsSearchTerm.value = newSearchTerm;
   };
 
   return {
+    UPDATE_SKILLS_SEARCH_TERM,
     CLEAR_USER_JOB_FILTER_SELECTIONS,
     ADD_SELECTED_Degrees,
     ADD_SELECTED_JOB_TYPES,
@@ -41,6 +48,7 @@ const useUserStore = defineStore("user", () => {
     selectedOrganizations,
     selectedJobTypes,
     selectedDegrees,
+    skillsSearchTerm,
   };
 });
 
