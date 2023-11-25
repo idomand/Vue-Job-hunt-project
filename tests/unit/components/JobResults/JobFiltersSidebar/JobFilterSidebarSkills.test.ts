@@ -4,8 +4,15 @@ import { createTestingPinia } from "@pinia/testing";
 import userEvent from "@testing-library/user-event";
 import useUserStore from "../../../../../src/stores/user.ts";
 
+import { useRoute } from "vue-router";
+import { Mock } from "vitest";
+vi.mock("vue-router");
+
 describe("JobFilterSidebarSkills", () => {
   function renderJobFilterSidebarSkills() {
+    const useMockRoute = useRoute as Mock;
+    useMockRoute.mockReturnValue({ query: { role: "" } });
+
     const pinia = createTestingPinia({ stubActions: false });
     const userStore = useUserStore();
 
